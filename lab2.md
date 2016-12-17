@@ -66,9 +66,16 @@
 
 Домен городов (city) включает города: Ann Arbor, Berkeley, Boston, Chicago, Corvallis, Colevo, Dallas, Gary, Lawrence, Menlo Park, Munchen, Nashville, New York, Oaklend, Palo Alto, Paris, Rockvill, Salt Lake City, San Francisco, San Jose, Vacaville, Walnul Creek, Washington. 
 
-Выполненные запросы:
+##Выполненные запросы:
 
 15)	Определить среднюю стоимость книги.
+> Среднюю стоимость находим с помощью агрегирующей функции AVG.
+
+```sql
+SELECT AVG(t.price) AS avg_book_price
+FROM titles AS t
+```
+![q15_res](q15_res.png)
 
 18)	Определить число авторов, проживающих в Калифорнии.
 > Выбираем все строки авторов, поле state которых = CA, и применяем агрегирующую функцию COUNT.
@@ -107,7 +114,58 @@ HAVING AVG(t.price) < (
 ![q38_res](q38_res.png)
 
 73)	Определить книги, стоимости которых составляют не более средней стоимости по издательству, где издавались эти книги.
+> В подзапросе находим среднюю цену для издательства текущей книги, если она больше, чем цена текущей книги, то книга включается в выборку.
+
+```sql
+SELECT *
+FROM titles AS t1
+WHERE t1.price <= (
+    SELECT AVG(t2.price) AS avg_booktype_price
+    FROM titles AS t2, publishers AS pub
+    GROUP BY t2.pub_id
+    HAVING t1.pub_id = t2.pub_id
+)
+```
+![q73_res](q73_res.png)
+
 74)	Определить для каждого штата число находящихся в нем издательств.
+> Группируем издательства по штатам и считаем количество в каждой группе.
+
+```sql
+SELECT p.state, COUNT(*) AS pub_count_in_state
+FROM publishers AS p
+GROUP BY p.state
+HAVING p.state IS NOT NULL
+```
+![q74_res](q74_res.png)
+
 87)	Определить для штатов число издательств, в которых выпускаются только книги ценой более 7 долларов. В запросе использовать подзапросы и предикат с квантором.
+> Используем квантор ALL, подзапросом которого являются все книги текущего издательства, если все эти цены меньше 7, тогда издательство выбирается.
+
+```sql
+SELECT p.state, COUNT(*) AS pub_count_in_state
+FROM publishers AS p
+WHERE 7 > ALL (
+        SELECT t.price
+        FROM titles AS t
+        WHERE t.pub_id = p.pub_id  
+)
+GROUP BY p.state
+HAVING p.state IS NOT NULL;
+```
+![q87_res](q87_res.png)
+
 90)	Определить издательства, не выпустившие книг.
+> В запрос включаются те издательства, которые отсутствуют в подзапросе, разбивающем книги на издательства. Если нету группы книг по текущему издательству, то это значит, что оно не выпустило ни одной книги.
+
+```sql
+SELECT *
+FROM publishers AS p
+WHERE p.pub_id NOT IN (
+    SELECT t.pub_id
+    FROM titles AS t
+    GROUP BY t.pub_id
+)
+```
+![q90_res](q90_res.png)
 
