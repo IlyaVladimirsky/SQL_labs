@@ -38,15 +38,29 @@ CREATE TABLE `2016_studentdb`.`ta5_Vladimirskiy_countries` (
 > Заполнить созданную таблицу с использованием оператора включения (6-8 записей). Просмотреть заполненную таблицу.
 
 ```sql
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`, `religion`) VALUES ('1', 'Belarus', '207,6', '9,608', 'belorussian', 'belorussian_ruble', 'orthodox');
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('2', 'Ethiopia', '1119,683 ', '96,633', 'ethiopic', 'birr');
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('3', 'Finland', '305,470 ', '5,268', 'finland', 'euro');
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('4', 'Japan', '364,485 ', '127,103', 'japanease', 'yen');
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('5', 'Luxembourg', '2,585', '0,520', 'france', 'euro');
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('6', 'Niger', '1266,699 ', '17,466', 'hindi', 'CFA Franc');
-INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`, `religion`) VALUES ('7', 'Scotland', '78,772 ', '5,327', 'english', 'British pound sterling', 'catholic');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`, `religion`) VALUES ('1', 'Belarus', '207.6', '9.608', 'belorussian', 'belorussian_ruble', 'orthodox');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('2', 'Ethiopia', '1119.683 ', '96.633', 'ethiopic', 'birr');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('3', 'Finland', '305.470 ', '5.268', 'finland', 'euro');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('4', 'Japan', '364.485 ', '127.103', 'japanease', 'yen');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('5', 'Luxembourg', '2.585', '0.520', 'france', 'euro');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`) VALUES ('6', 'Niger', '1266.699 ', '17.466', 'hindi', 'CFA Franc');
+INSERT INTO `2016_studentdb`.`ta5_Vladimirskiy_countries` (`id`, `name`, `area_T`, `population_M`, `language`, `currency_unit`, `religion`) VALUES ('7', 'Scotland', '78.772 ', '5.327', 'english', 'British pound sterling', 'catholic');
 ```
 ```sql
 SELECT * FROM 2016_studentdb.ta5_Vladimirskiy_countries;
 ```
 ![sel_all](sel_all.png)
+
+> Изменить одну или несколько строк таблицы с использованием поисковой модификации. Просмотреть измененную таблицу.
+
+```sql
+UPDATE `2016_studentdb`.`ta5_Vladimirskiy_countries` SET `religion`='orthodox' WHERE `id`='3';
+UPDATE `2016_studentdb`.`ta5_Vladimirskiy_countries` SET `religion`='catholic' WHERE `id`='5';
+```
+![sel_all_upd](sel_all_upd.png)
+
+> Удалить одну или несколько строк из таблицы с использованием оператора поискового удаления. Просмотреть измененную таблицу.
+```sql
+DELETE FROM `2016_studentdb`.`ta5_Vladimirskiy_countries` WHERE `id`='1';
+```
+![sel_all_del](sel_all_del.png)
