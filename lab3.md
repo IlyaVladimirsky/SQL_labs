@@ -60,7 +60,11 @@ UPDATE `2016_studentdb`.`ta5_Vladimirskiy_countries` SET `religion`='catholic' W
 ![sel_all_upd](sel_all_upd.png)
 
 > Удалить одну или несколько строк из таблицы с использованием оператора поискового удаления. Просмотреть измененную таблицу.
+
 ```sql
 DELETE FROM `2016_studentdb`.`ta5_Vladimirskiy_countries` WHERE `id`='1';
 ```
 ![sel_all_del](sel_all_del.png)
+
+> Объявить скроллируемый курсор в соответствии со спецификацией курсора из лабораторной работы.
+
