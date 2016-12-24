@@ -66,5 +66,48 @@ DELETE FROM `2016_studentdb`.`ta5_Vladimirskiy_countries` WHERE `id`='1';
 ```
 ![sel_all_del](sel_all_del.png)
 
-> Объявить скроллируемый курсор в соответствии со спецификацией курсора из лабораторной работы.
+### Работа с курсором
+Было сделано следующее:<br>
+Обявлен курсор для всех католических стран, и с помощью него выбрана первая страна в списке. Для этого создана процедура. Также создается промежуточная таблица, чтобы собрать все необходимые id из таблицы стран(имитация массива).
 
+```sql
+CREATE PROCEDURE `pr5_Vladimirskiy`()
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE id INT;
+	DECLARE religion VARCHAR(45);
+    
+	DECLARE cu5_Vladimirskiy CURSOR FOR 
+	SELECT t.id FROM 2016_studentdb.ta5_Vladimirskiy_countries AS t
+    WHERE t.religion = 'catholic';
+    
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    CREATE TEMPORARY TABLE temp (c_id INT);
+ 
+	OPEN cu5_Vladimirskiy;    
+     
+	cloop: LOOP    
+		IF done = 1 THEN 
+			LEAVE cloop;
+		END IF;
+ 
+		FETCH cu5_Vladimirskiy INTO id;
+        INSERT INTO temp (c_id) VALUES (id); 
+	END LOOP cloop;
+
+	SELECT * FROM 2016_studentdb.ta5_Vladimirskiy_countries AS t 
+    WHERE t.id IN(SELECT c_id FROM temp)
+    LIMIT 1;
+    
+    DROP TEMPORARY TABLE IF EXISTS temp;
+
+	CLOSE cu5_Vladimirskiy;
+END
+```
+Вызов процедуры 
+```sql
+CALL pr5_Vladimirskiy()
+```
+выдает следующий результат:<br>
+![cur_res](cur_res.png)
