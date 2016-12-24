@@ -130,7 +130,7 @@ INSERT INTO 2016_studentdb.vi5_Vladimirskiy
 (name, area_T, population_M, religion ) 
 VALUES ('England', 150, 15, 'catholic');
 ```
-![viinsert_table](viinsert_table.png)
+![viinsert_table](viinsert_table.png)<br>
 ![vishow](vishow.png)
 
 > Удалить несколько строк из представляемой таблицы с использованием оператора поискового удаления. Просмотреть представляемую и базовую таблицы и сравнить их с предыдущими вариантами этих таблиц.
@@ -139,7 +139,7 @@ VALUES ('England', 150, 15, 'catholic');
 DELETE FROM 2016_studentdb.vi5_Vladimirskiy 
 WHERE name = 'England'
 ```
-![videl_row](videl_row.png)
+![videl_row](videl_row.png)<br>
 ![vishow](vishow.png)
 
 > Удалить представление с использованием оператора удаления представления.
@@ -148,3 +148,22 @@ WHERE name = 'England'
 DROP VIEW 2016_studentdb.vi5_Vladimirskiy
 ```
 
+###Работа с индексами
+> Создать индекс, который бы позволял быстрый поиск по первичному ключу, содержащему столбцы уникальности.
+
+```sql
+CREATE INDEX country_index
+ON 2016_studentdb.ta5_Vladimirskiy_countries (name)
+```
+
+> Составить и выполнить какой-нибудь запрос в индексированной таблице.
+
+```sql
+SELECT * FROM 2016_studentdb.ta5_Vladimirskiy_countries
+```
+
+> Удалить индекс.
+
+```sql
+DROP INDEX country_index ON 2016_studentdb.ta5_Vladimirskiy_countries
+```
