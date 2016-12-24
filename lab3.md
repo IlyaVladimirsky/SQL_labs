@@ -111,3 +111,40 @@ CALL pr5_Vladimirskiy()
 ```
 выдает следующий результат:<br>
 ![cur_res](cur_res.png)
+
+### Работа с представлением
+> В соответствии с заданием составить оператор создания представления, выполнить данный оператор. Просмотреть представляемую таблицу.
+
+```sql
+CREATE VIEW 2016_studentdb.vi5_Vladimirskiy 
+AS SELECT t.name, t.area_T, t.population_M, t.religion 
+FROM 2016_studentdb.ta5_Vladimirskiy_countries AS t
+WHERE t.language = 'english';
+```
+![vishow](vishow.png)
+
+> Включить несколько записей в представляемую таблицу с использованием оператора включения. Просмотреть представляемую и базовую таблицы и сравнить их с предыдущими вариантами этих таблиц.
+
+```sql
+INSERT INTO 2016_studentdb.vi5_Vladimirskiy 
+(name, area_T, population_M, religion ) 
+VALUES ('England', 150, 15, 'catholic');
+```
+![viinsert_table](viinsert_table.png)
+![vishow](vishow.png)
+
+> Удалить несколько строк из представляемой таблицы с использованием оператора поискового удаления. Просмотреть представляемую и базовую таблицы и сравнить их с предыдущими вариантами этих таблиц.
+
+```sql
+DELETE FROM 2016_studentdb.vi5_Vladimirskiy 
+WHERE name = 'England'
+```
+![videl_row](videl_row.png)
+![vishow](vishow.png)
+
+> Удалить представление с использованием оператора удаления представления.
+
+```sql
+DROP VIEW 2016_studentdb.vi5_Vladimirskiy
+```
+
